@@ -1,12 +1,12 @@
 const reviewApiCall = rentalId => {
   return new Promise((resolve, reject) => {
-    fetch(`http://52.53.233.207:3001/api/rentals/${rentalId}`)
+    fetch(`http://localhost:3001/api/rentals/${rentalId}`)
       .then(response => response.json())
       .then(reviews => {
         let length = reviews.length;
-        let cleanliness = 0; 
-        let communication = 0; 
-        let value = 0; 
+        let cleanliness = 0;
+        let communication = 0;
+        let value = 0;
         let accuracy = 0;
         let checkIn = 0;
         let location = 0;

@@ -51,7 +51,7 @@ class App extends Component {
   render() {
     return (
       <div className={style.app}>
-        <ReviewsHeader 
+        <ReviewsHeader
           average={this.state.average}
           total={this.state.total}
         />
@@ -64,8 +64,8 @@ class App extends Component {
           <Rating name={{name: 'Location'}}score={this.state.location}/>
         </div>
         {this.state.currentReviews.map((review, i) => <Review review={review} key={i} />)}
-        {this.state.reviews.length > 0 && 
-          <ReviewsNav 
+        {this.state.reviews.length > 0 &&
+          <ReviewsNav
             currentPlace={this.state.currentPlace}
             currentForward={this.currentForward}
             currentBackword={this.currentBackword}

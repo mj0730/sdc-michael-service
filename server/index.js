@@ -30,4 +30,4 @@ let port = process.env.PORT;
 if (port == null || port == "") {
   port = 3001;
 }
-app.listen(port);
+app.listen(port, console.log(`Service server listening on ${port}`));
