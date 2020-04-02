@@ -38,14 +38,23 @@ app.get('/app.js', cors(), async (req, res) => {
 });
 
 //CRUD routes
+//create new user
 app.post('/api/users', (req, res) => {
   let userName = req.body.name;
-  console.log(userName, req.body)
   User.insertMany(fakeUser(userName))
     .then(data => console.log(`Inserted ${data} into database`))
-    .then(res.sendStatus(200));
+    .then(res.sendStatus(200))
+    .catch(err => console.log(`ERROR createing user: ${err}`));
 })
 
+//find a user by name
+app.get('/api/users/:userName', (req, res) => {
+  let userName = req.params.userName;
+  User.findOne( {name: userName})
+    .then(data => console.log(`Found user: ${data.name}`))
+    .then(res.sendStatus(200))
+    .catch(err => console.log(`ERROR finding user: ${err}`))
+})
 
 //delete all reviews for a property
 app.delete('/api/rentals/:id', (req, res) => {
