@@ -56,6 +56,15 @@ app.get('/api/users/:userName', (req, res) => {
     .catch(err => console.log(`ERROR finding user: ${err}`))
 })
 
+//update a user image. currently uses random image from lorem picsum
+app.put('/api/users', (req, res) => {
+  let q = {name: req.body.name};
+  User.updateOne(q, { $set: { imageUrl: 'https://picsum.photos/80'}})
+    .then(data => console.log(`${res.result.nModified} document updated: ${data}`))
+    .then(res.sendStatus(200))
+    .catch(err => console.log(`ERROR updating ${q}: ${err}`))
+})
+
 //delete all reviews for a property
 app.delete('/api/rentals/:id', (req, res) => {
   Review.deleteMany({ rental: req.params.id })
