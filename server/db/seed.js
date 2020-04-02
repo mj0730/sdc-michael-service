@@ -18,7 +18,7 @@ const seedDb = function() {
       for (let i = 0; i < users.length; i++) {
         for (let j = 0; j < 100; j++) {
           reviews.push({
-            user: users[i]._id, 
+            user: users[i]._id,
             rental: j + 1,
             body: faker.fake('{{lorem.paragraph}}'),
             cleanliness: Math.ceil(Math.random() * 5),
