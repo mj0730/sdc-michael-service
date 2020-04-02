@@ -5,6 +5,18 @@ const cors = require('cors');
 let app = express();
 app.use(express.json());
 app.use(express.static(__dirname + '/../public/dist'));
+app.use(express.json()); // support json encoded bodies
+app.use(express.urlencoded({ extended: true })); // support encoded bodies
+app.use(cors()); //added for crud routes
+
+//fake user generator
+const fakeUser = (userName) => {
+  let randomNumber = Math.floor(Math.random() * 100 + 1);
+  return {
+    name: userName,
+    imageUrl: `https://hackreactoramazonfrontendcapstone.s3-us-west-2.amazonaws.com/${randomNumber}.jpeg`
+  }
+}
 
 app.get('/api/rentals/:id', cors(), async (req, res) => {
   try {
@@ -25,6 +37,27 @@ app.get('/app.js', cors(), async (req, res) => {
   res.sendFile(path.join(__dirname, '../public/dist/bundle.js'))
 });
 
+//CRUD routes
+app.post('/api/users', (req, res) => {
+  let userName = req.body.name;
+  console.log(userName, req.body)
+  User.insertMany(fakeUser(userName))
+    .then(data => console.log(`Inserted ${data} into database`))
+    .then(res.sendStatus(200));
+})
+
+
+//delete all reviews for a property
+app.delete('/api/rentals/:id', (req, res) => {
+  Review.deleteMany({ rental: req.params.id })
+    .then(console.log(`Reviews for record ${req.params.id} deleted`))
+    .then(res.sendStatus(204))
+    .catch(err => console.log(`ERROR: ${err}`));
+})
+
+
+
+//
 
 let port = process.env.PORT;
 if (port == null || port == "") {
