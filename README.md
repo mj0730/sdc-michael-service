@@ -17,14 +17,21 @@
 
 ## Usage
 
-> Some usage instructions
+### CRUD API
+To create a new user in the database:
+send POST request to domain/api/users with the user name in the body of the request with the name field (name: username)
+
+To find a specific user by name:
+send GET request to domain/api/users/username
+
+To update a user avatar:
+send PUT request to domain/api/users with the user name in the body of the request with the name field (name: username)
+This assigns a random image to the user
+
+To delete all reviews for a property listing:
+send DELETE request to domain/api/rentals/id where id is the number id of the listing
 
 ## Requirements
-
-An `nvmrc` file is included if using [nvm](https://github.com/creationix/nvm).
-
-- Node 6.13.0
-- etc
 
 ## Development
 

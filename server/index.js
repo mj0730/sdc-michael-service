@@ -60,7 +60,7 @@ app.get('/api/users/:userName', (req, res) => {
 app.put('/api/users', (req, res) => {
   let q = {name: req.body.name};
   User.updateOne(q, { $set: { imageUrl: 'https://picsum.photos/80'}})
-    .then(data => console.log(`${res.result.nModified} document updated: ${data}`))
+    .then(console.log(`Document updated`))
     .then(res.sendStatus(200))
     .catch(err => console.log(`ERROR updating ${q}: ${err}`))
 })
