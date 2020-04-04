@@ -37,7 +37,7 @@ writeUsers.write(
   "utf8"
 );
 
-function writeOneMillionUsers(writer, encoding, callback) {
+function writeFakeUsers(writer, encoding, callback) {
   let i = numOfFakeUsers;
 
   function write() {
@@ -61,7 +61,7 @@ function writeOneMillionUsers(writer, encoding, callback) {
   write();
 }
 
-writeOneMillionUsers(writeUsers, "utf-8", () => {
+writeFakeUsers(writeUsers, "utf-8", () => {
   writeUsers.end();
 });
 
@@ -72,7 +72,7 @@ writeReviews.write(
   "utf8"
 );
 
-function writeTenMillionReviews(writer, encoding, callback) {
+function writeFakeReviews(writer, encoding, callback) {
   let i = numOfFakeReviews;
 
   function write() {
@@ -105,6 +105,6 @@ function writeTenMillionReviews(writer, encoding, callback) {
   write();
 }
 
-writeTenMillionReviews(writeReviews, "utf-8", () => {
+writeFakeReviews(writeReviews, "utf-8", () => {
   writeReviews.end();
 });
