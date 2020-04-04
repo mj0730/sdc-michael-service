@@ -3,3 +3,5 @@ public/dist/index.html
 public/dist/bundle.js
 public
 package-lock.json
+__mocks__/scrapedimages
+*.csv
