@@ -15,9 +15,12 @@
 1. [Requirements](#requirements)
 1. [Development](#development)
 
-## Usage
+## Database
+Running server/db/generate_data.js will create dummy data in .csv format to be imported into the database. Global constants for the number of records for each data input can be set at the top of the file.
 
-### CRUD API
+DBs used for this project are Postgres and Cassandra.
+
+## CRUD API
 To create a new user in the database:
 send POST request to domain/api/users with the user name in the body of the request with the name field (name: username)
 
@@ -39,8 +42,15 @@ send DELETE request to domain/api/rentals/id where id is the number id of the li
 
 From within the root directory:
 
+Database
+
 ```sh
-npm install -g webpack
-npm install
+npm i pg pg-hstore sequelize
+
+```
+
+For data mocking:
+```sh
+npm i faker moment
 ```
 
