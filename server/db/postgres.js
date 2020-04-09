@@ -3,15 +3,21 @@ const Sequelize = require('sequelize');
 
 const db = new Sequelize('airbnb', 'postgres', 'root', {
   host: 'localhost',
-  dialect: 'postgres'
+  dialect: 'postgres',
+  port: '5433'
 });
 
 const User = db.define('users', {
   name: Sequelize.TEXT,
   imageUrl: Sequelize.TEXT,
-});
+  },
+  {
+    timestamps: false
+  }
+);
 
 const Review = db.define('reviews', {
+  userId: Sequelize.INTEGER,
   rental: Sequelize.INTEGER,
   body: Sequelize.TEXT,
   date: Sequelize.DATE,
@@ -21,9 +27,11 @@ const Review = db.define('reviews', {
   accuracy: Sequelize.INTEGER,
   checkIn: Sequelize.INTEGER,
   location: Sequelize.INTEGER
-})
-
-User.belongsTo(Review);
+  },
+  {
+    timestamps: false
+  }
+)
 
 db.sync();
 

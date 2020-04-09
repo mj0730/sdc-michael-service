@@ -5,7 +5,7 @@ const moment = require("moment");
 
 //constants used for number of generated items
 const numOfFakeUsers = 100000;
-const numOfFakeReviews = 25000000;
+const numOfFakeReviews = 20000000;
 const numOfProperties = 10000000;
 
 //getting image file names
@@ -67,10 +67,10 @@ writeFakeUsers(writeUsers, "utf-8", () => {
 
 //generate reviews table csv
 const writeReviews = fs.createWriteStream("randomReviews.csv");
-writeReviews.write(
-  "userId,rental,body,date,cleanliness,communication,value,accuracy,checkIn,location\n",
-  "utf8"
-);
+// writeReviews.write(
+//   "userId,rental,body,date,cleanliness,communication,value,accuracy,checkIn,location\n",
+//   "utf8"
+// );
 
 function writeFakeReviews(writer, encoding, callback) {
   let i = numOfFakeReviews;
