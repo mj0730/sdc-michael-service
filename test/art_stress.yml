@@ -2,21 +2,25 @@ config:
   target: 'http://localhost:3001'
   phases:
     - duration: 10
-      arrivalRate: 10
+      arrivalRate: 1
       name: '1/sec'
     - duration: 10
-      arrivalRate: 100
+      arrivalRate: 10
       name: '10/sec'
     - duration: 10
-      arrivalRate: 1000
+      arrivalRate: 100
       name: '100/sec'
     - duration: 10
-      arrivalRate: 10000
+      arrivalRate: 1000
       name: '1000/sec'
   processor: "./random_index_newrelic.js"
 scenarios:
-  - name: "Get random rental ID"
-    flow:
-    - function: "getRandomNumber"
-    - get:
-        url: "/api/rentals/{{ index }}"
+ - name: "Get random rental ID"
+   flow:
+   - function: "getRandomNumber"
+   - get:
+       url: "/api/rentals/{{ index }}"
+#  - name: "Post new user"
+#    flow:
+#    - post:
+#        url: "/api/review"

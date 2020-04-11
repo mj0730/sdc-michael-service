@@ -3,6 +3,8 @@ const express = require('express');
 const path = require('path');
 // const { User, Review } = require('./db/index.js'); //mongo
 const { User, Review } = require('./db/postgres.js'); //postgres
+const faker = require('faker'); //for generating fake reviews
+const moment = require('moment'); //for generating fake reviews
 const cors = require('cors');
 let app = express();
 app.use(express.static(__dirname + '/../public/dist'));
@@ -48,10 +50,33 @@ app.get('/api/rentals/:id', (req, res) => {
     .catch(err => console.error(err));
 })
 
+//create a new fake review
+app.post('/api/review', (req, res) => {
+  const randomRating = () => Math.floor(Math.random() * 5 + 1);
+  let review = {
+    userId: Math.floor(Math.random() * 100000 + 1),
+    rental: Math.floor(Math.random() * 31000000 + 1),
+    body: faker.fake("{{lorem.paragraph}}"),
+    date: moment(
+      new Date(+new Date() - Math.floor(Math.random() * 1000000000))
+    ).format("l"),
+    cleanliness: Math.ceil(Math.random() * 5),
+    communication: Math.ceil(Math.random() * 5),
+    value: Math.ceil(Math.random() * 5),
+    accuracy: Math.ceil(Math.random() * 5),
+    checkIn: Math.ceil(Math.random() * 5),
+    location: Math.ceil(Math.random() * 5)
+  }
+
+  Review.create(review)
+    .then(res.sendStatus(201))
+    .catch(err => console.error(err));
+})
+
 //create new user
 app.post('/api/users', (req, res) => {
   let userName = req.body.name;
-  User.insertMany(fakeUser(userName))
+  User.create(fakeUser(userName))
     .then(data => console.log(`Inserted ${data} into database`))
     .then(res.sendStatus(200))
     .catch(err => console.error(`ERROR createing user: ${err}`));

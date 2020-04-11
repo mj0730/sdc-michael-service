@@ -6,3 +6,5 @@ package-lock.json
 __mocks__/scrapedimages
 *.csv
 env
+*.log
+newrelic_agent.log

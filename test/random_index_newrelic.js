@@ -1,3 +1,5 @@
+const faker = require('faker');
+
 const getRandomNumber = (context, events, done) => {
   const min = 1;
   const max = 31000000;
@@ -7,4 +9,5 @@ const getRandomNumber = (context, events, done) => {
   return done();
 };
 
-module.exports = {getRandomNumber}
+
+module.exports = {getRandomNumber};

@@ -9,7 +9,8 @@
     "server": "node server/index.js",
     "server-dev": "nodemon server/index.js",
     "seed": "node server/db/seed.js",
-    "test": "jest"
+    "test": "jest",
+    "bombard": "artillery run test/art_stress.yml"
   },
   "repository": {
     "type": "git",
