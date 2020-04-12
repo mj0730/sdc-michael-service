@@ -37,6 +37,8 @@ send DELETE request to domain/api/rentals/id where id is the number id of the li
 ## Requirements
 
 ## Development
+To stress test an api route: npm run bombard
+Each request type (GET, POST) in the the test/art_stress.yml file can be commented out to test one at a time, or uncomment all to run both concurrently.
 
 ### Installing Dependencies
 
@@ -54,3 +56,7 @@ For data mocking:
 npm i faker moment
 ```
 
+for api/db stress testing:
+```sh
+npm i artillery
+```
