@@ -21,38 +21,29 @@ const fakeUser = (userName) => {
   }
 }
 
-//OLD CODE, CAN DELETE ONCE NEW CODE IS TESTED
-// app.get('/api/rentals/:id', cors(), async (req, res) => {
-//   try {
-//     let reviews = await Review.find({ rental: req.params.id});
-//     let newArray = [];
-//     for (let i = 0; i < reviews.length; i++) {
-//       let user = await User.findById(reviews[i].user);
-//       let copy = {...reviews[i]._doc, userProfile: user};
-//       newArray.push(copy)
-//     }
-//    res.json(newArray)
-//   } catch (e) {
-//     res.sendStatus(500);
-//   }
-// });
-
-app.get('/app.js', cors(), async (req, res) => {
-  res.sendFile(path.join(__dirname, '../public/dist/bundle.js'))
-});
-
 //CRUD routes
 //Get all reviews by rental id
 app.get('/api/rentals/:id', (req, res) => {
   let rentalId = req.params.id;
+  let result = [];
+
   Review.findAll({where: {rental: rentalId}})
-    .then(data => res.json(data))
+    .then(async (data) => {
+      console.log('DATAAAAAAA: ', data.dataValues);
+      for(let i = 0; i < data.length; i++) {
+        let user = await User.findOne({ where: { id: data[i].userId } });
+        let copy = {...data[i].dataValues, userProfile: user.dataValues};
+        result.push(copy);
+        console.log('COPY: ', copy)
+      }
+      res.json(result);
+    })
     .catch(err => console.error(err));
 })
 
 //create a new fake review
 app.post('/api/review', (req, res) => {
-  const randomRating = () => Math.floor(Math.random() * 5 + 1);
+  const randomRating = () => Math.ceil(Math.random() * 5);
   let review = {
     userId: Math.floor(Math.random() * 100000 + 1),
     rental: Math.floor(Math.random() * 31000000 + 1),
@@ -60,12 +51,12 @@ app.post('/api/review', (req, res) => {
     date: moment(
       new Date(+new Date() - Math.floor(Math.random() * 1000000000))
     ).format("l"),
-    cleanliness: Math.ceil(Math.random() * 5),
-    communication: Math.ceil(Math.random() * 5),
-    value: Math.ceil(Math.random() * 5),
-    accuracy: Math.ceil(Math.random() * 5),
-    checkIn: Math.ceil(Math.random() * 5),
-    location: Math.ceil(Math.random() * 5)
+    cleanliness: randomRating(),
+    communication: randomRating(),
+    value: randomRating(),
+    accuracy: randomRating(),
+    checkIn: randomRating(),
+    location: randomRating()
   }
 
   Review.create(review)
@@ -126,9 +117,6 @@ app.delete('/api/rentals/:id', (req, res) => {
     .catch(err => console.error(`ERROR: ${err}`));
 })
 
-
-
-//
 
 let port = process.env.PORT;
 if (port == null || port == "") {

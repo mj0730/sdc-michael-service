@@ -44,6 +44,13 @@ class App extends Component {
   componentDidMount() {
     let endPoint = window.location.href.split('=');
     reviewApiCall(endPoint[1])
+      .then(result => {
+        for (let key in result) {
+          if (result[key] === NaN) {
+            result[key] = 0;
+          }
+        }
+      })
       .then(result => this.setState(result))
       .catch(e => this.setState(e));
   }
