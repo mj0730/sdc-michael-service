@@ -1,4 +1,3 @@
-//const {Client} = require('pg');
 const Sequelize = require('sequelize');
 const aws = {
   host: '',

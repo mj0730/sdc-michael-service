@@ -50,6 +50,7 @@ class App extends Component {
             result[key] = 0;
           }
         }
+        return result;
       })
       .then(result => this.setState(result))
       .catch(e => this.setState(e));
