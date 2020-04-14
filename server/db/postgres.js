@@ -1,11 +1,19 @@
 //const {Client} = require('pg');
 const Sequelize = require('sequelize');
+const aws = {
+  host: '',
+  dialect: 'postgres',
+  port: '5432'
+}
 
-const db = new Sequelize('airbnb', 'postgres', 'root', {
+const local = {
   host: 'localhost',
   dialect: 'postgres',
   port: '5433'
-});
+}
+
+
+const db = new Sequelize('airbnb', 'postgres', 'root', aws);
 
 const User = db.define('users', {
   name: Sequelize.TEXT,
