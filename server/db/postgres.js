@@ -13,7 +13,7 @@ const local = {
 }
 
 
-const db = new Sequelize('airbnb', 'postgres', 'root', aws);
+const db = new Sequelize('airbnb', 'postgres', 'root', local);
 
 const User = db.define('users', {
   name: Sequelize.TEXT,

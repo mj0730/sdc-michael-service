@@ -1,25 +1,15 @@
 require('newrelic');
 const express = require('express');
-const path = require('path');
-// const { User, Review } = require('./db/index.js'); //mongo
 const { User, Review } = require('./db/postgres.js'); //postgres
 const faker = require('faker'); //for generating fake reviews
 const moment = require('moment'); //for generating fake reviews
 const cors = require('cors');
 let app = express();
+
 app.use(express.static(__dirname + '/../public/dist'));
 app.use(express.json()); // support json encoded bodies
 app.use(express.urlencoded({ extended: true })); // support encoded bodies
 app.use(cors()); //added for crud routes
-
-//fake user generator //this will need to be modified to work with new databases. this url is using the old service's architecture
-const fakeUser = (userName) => {
-  let randomNumber = Math.floor(Math.random() * 100 + 1);
-  return {
-    name: userName,
-    imageUrl: `https://hackreactoramazonfrontendcapstone.s3-us-west-2.amazonaws.com/${randomNumber}.jpeg`
-  }
-}
 
 //CRUD routes
 //Get all reviews by rental id
@@ -29,12 +19,10 @@ app.get('/api/rentals/:id', (req, res) => {
 
   Review.findAll({where: {rental: rentalId}})
     .then(async (data) => {
-      console.log('DATAAAAAAA: ', data.dataValues);
       for(let i = 0; i < data.length; i++) {
         let user = await User.findOne({ where: { id: data[i].userId } });
         let copy = {...data[i].dataValues, userProfile: user.dataValues};
         result.push(copy);
-        console.log('COPY: ', copy)
       }
       res.json(result);
     })
@@ -62,15 +50,6 @@ app.post('/api/review', (req, res) => {
   Review.create(review)
     .then(res.sendStatus(201))
     .catch(err => console.error(err));
-})
-
-//create new user
-app.post('/api/users', (req, res) => {
-  let userName = req.body.name;
-  User.create(fakeUser(userName))
-    .then(data => console.log(`Inserted ${data} into database`))
-    .then(res.sendStatus(200))
-    .catch(err => console.error(`ERROR createing user: ${err}`));
 })
 
 //find a user by name

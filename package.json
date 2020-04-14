@@ -8,7 +8,6 @@
     "build": "webpack --config webpack.prod.js",
     "server": "node server/index.js",
     "server-dev": "nodemon server/index.js",
-    "seed": "node server/db/seed.js",
     "test": "jest",
     "bombard": "artillery run test/art_stress.yml"
   },
@@ -28,7 +27,6 @@
     "date-fns": "^2.11.0",
     "express": "^4.17.1",
     "moment": "^2.24.0",
-    "mongoose": "^5.9.4",
     "newrelic": "^6.5.0",
     "pg": "^8.0.0",
     "pg-hstore": "^2.3.3",
