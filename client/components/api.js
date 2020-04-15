@@ -1,6 +1,6 @@
 const reviewApiCall = rentalId => {
   return new Promise((resolve, reject) => {
-    fetch(`http://localhost:3001/api/rentals/${rentalId}`)
+    fetch(`/api/rentals/${rentalId}`)
       .then(response => response.json())
       .then(reviews => {
         let length = reviews.length;
