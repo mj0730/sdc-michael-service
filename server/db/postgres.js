@@ -1,6 +1,6 @@
 const Sequelize = require('sequelize');
 const aws = {
-  host: '',
+  host: 'ip-172-31-25-147.us-east-2.compute.internal',
   dialect: 'postgres',
   port: '5432'
 }
@@ -12,7 +12,7 @@ const local = {
 }
 
 
-const db = new Sequelize('airbnb', 'postgres', 'root', local);
+const db = new Sequelize('airbnb', 'postgres', 'root', aws);
 
 const User = db.define('users', {
   name: Sequelize.TEXT,
