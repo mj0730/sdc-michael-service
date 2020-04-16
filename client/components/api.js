@@ -1,6 +1,7 @@
+const URL = '3.22.188.226'
 const reviewApiCall = rentalId => {
   return new Promise((resolve, reject) => {
-    fetch(`/api/rentals/${rentalId}`)
+    fetch(`http://${URL}/api/rentals/${rentalId}`)
       .then(response => response.json())
       .then(reviews => {
         let length = reviews.length;
