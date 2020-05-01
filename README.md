@@ -1,24 +1,11 @@
-# Project Name
+# System Design - Reviews Service
 
-> Project description
-
-## Related Projects
-
-  - https://github.com/teamName/repo
-  - https://github.com/teamName/repo
-  - https://github.com/teamName/repo
-  - https://github.com/teamName/repo
-
-## Table of Contents
-
-1. [Usage](#Usage)
-1. [Requirements](#requirements)
-1. [Development](#development)
+Implement a new back-end on an inherited legacy code base, including a new database implementation (MongoDB -> PostgreSQL). Limit refactoring of front-end service to minimal needed (functionality).
 
 ## Database
 Running server/db/generate_data.js will create dummy data in .csv format to be imported into the database. Global constants for the number of records for each data input can be set at the top of the file.
 
-DBs used for this project are Postgres and Cassandra.
+DBs used for this project are Postgres and Cassandra (not selected for final implementation).
 
 ## CRUD API
 To create a new user in the database:
